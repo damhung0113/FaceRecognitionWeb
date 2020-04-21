@@ -1,116 +1,129 @@
 @extends('layouts.app')
 
 @section('content')
-</!DOCTYPE html>
-<html>
-<head>
-  <title>
-  <title>@yield('title')</title>
-  <link rel="stylesheet" type="text/css" href="{{Asset('assets/css/bootstrap.css')}}"/>
-  <link rel="stylesheet" type="text/css" href="{{Asset('assets/css/style.css')}}">
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-  <script type="text/javascript" src="{{Asset('assets/js/jquery-validate/jquery.validate.js')}}"></script>
-  </title>
-</head>
+  <head>
+    <title>
+    <title>@yield('title')</title>
+    <link rel="stylesheet" type="text/css" href="{{Asset('assets/css/bootstrap.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{Asset('assets/css/style.css')}}">
+    </title>
+  </head>
 
-<body>
-<div class="divwelcom">
-  <div class="logo">
-    <img class="img1" src="https://vnu.edu.vn/home/images/logo.png" alt="IMG">
-  </div>
-
-  <div class="tt">
-    <p style="font-size: 16pt,"><span style="color: #007f49">CỔNG THÔNG TIN ĐÀO TẠO ĐẠI HỌC </span></p>
-  </div>
-</div>
-<div id="bentrai">
-    <div id="divEr">
-      <h5>QUẢN LÝ ĐIỂM DANH SINH VIÊN</h5>
-      <h6>DÀNH CHO</h6>
-      <ul>
-        <li>Giảng viên </li>
-        <li>Sinh viên </li>
-      </ul>
-      <h6>HƯỚNG DẪN SỬ DỤNG</h6>
-      <ul>
-        <li>Giảng viên : Quản lý thông tin sinh viên, kiểm tra xem sinh viên nào vắng mặt, sinh viên nào đi học đầy đủ, gửi mail về cho sinh viên.</li>
-        <li>Sinh viên : Kiểm tra thông tin buổi học của mình, kiểm tra số buổi vắng mặt.</li>
-      </ul>
+  <div class="divwelcom">
+    <div class="logo">
+      <img class="img1" src="https://vnu.edu.vn/home/images/logo.png" alt="IMG">
     </div>
-      
-</div>
-<div id="benphai">
-<form method="POST" action="{{ route('login') }}">
-  <h4>ĐĂNG NHẬP</h4>
-  <label for="fname">Tên truy cập</label>
-  <input name="email" id="email" placeholder="Email" type="email" required="" class="form-control">
-  <label for="fname">Mật khẩu</label>
-  <input name="password" placeholder="Password" type="password" required="" class="form-control">
-  <p>Bạn chưa có tài khoản ? <a href="{{Asset('register')}}">Đăng ký</a></p>
-  @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Quên mật khẩu ?') }}
-                                    </a>
-                                @endif
-  <button class="btn btn-lg btn-primary bth-block">Đăng Nhập</button>
-  {{ csrf_field() }}
-</form>
-</div>
-<style>
-#bentrai {
-   float: left;
-    display: block;
-    padding: 10px;
-    width: 55%;
-    line-height: 20px;
-    text-align: left;
-    margin-left: 10px;
 
-}
-#benphai {
-    float: right;
-    display: block;
-    padding: 10px;
-    width: 35%;
-    margin-right: 10px;
-}
+    <div class="tt">
+      <p style="font-size: 16pt,"><span style="color: #007f49" class="text-center">ỨNG DỤNG NHẬN DIỆN KHUÔN MẶT VÀO ĐIỂM DANH SINH VIÊN</span></p>
+    </div>
+  </div>
 
-.nimbus-is-editor {
-    background-color: white;
-}
-.divwelcom{
-  display: block;
-    text-align: left;
-    margin: auto;
-    border-bottom: 1px solid #c5c5c5;
-    height: 110px;
-}
-.logo{
-  float: left;
-    display: block;
-}
-.tt{
-  float: left;
-    display: block;
-    height: 100px;
-    text-align: left;
-    vertical-align: middle;
-    width: auto;
-    color: #007f49;
-    font-size: 16pt;
-    font-weight: bold;
-    margin: 10px 10px 10px 10px;
-}
-h6,h5,h4,h3,h2 {
-    display: block;
-    margin-block-start: 1.33em;
-    margin-block-end: 1.33em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-    color: green;
-}
-</style>
-</body>
-</html>
+
+  <main class="login-form">
+    <div class="cotainer">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">ĐĂNG NHẬP</div>
+            <div class="card-body">
+              <form method="POST" action="{{ route('login') }}" class="form-login">
+                  <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail</label>
+                    <div class="col-md-6">
+                      <input type="text" id="email" class="form-control" name="email" required autofocus>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="password" class="col-md-4 col-form-label text-md-right">Mật khẩu</label>
+                    <div class="col-md-6">
+                      <input type="password" id="password" class="form-control" name="password" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                  </div>
+                {{ csrf_field() }}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    .divwelcom {
+      display: block;
+      text-align: left;
+      margin: auto;
+      border-bottom: 1px solid #c5c5c5;
+      height: 110px;
+    }
+
+    .logo {
+      float: left;
+      display: block;
+    }
+
+    .tt {
+      float: left;
+      display: block;
+      height: 100px;
+      text-align: left;
+      vertical-align: middle;
+      width: auto;
+      color: #007f49;
+      font-size: 16pt;
+      font-weight: bold;
+      margin: 10px 10px 10px 10px;
+    }
+
+    h6,h5,h4,h3,h2 {
+        display: block;
+        margin-block-start: 1.33em;
+        margin-block-end: 1.33em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+        color: green;
+    }
+
+    body {
+      margin: 0;
+      font-size: .9rem;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #212529;
+      text-align: left;
+      background-color: #f5f8fa;
+    }
+
+    .navbar-laravel {
+      box-shadow: 0 2px 4px rgba(0,0,0,.04);
+    }
+
+    .navbar-brand , .nav-link, .my-form, .login-form {
+      font-family: Raleway, sans-serif;
+    }
+    .my-form {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .my-form .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .login-form {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .login-form .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  </style>
 @endsection

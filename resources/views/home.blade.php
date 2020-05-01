@@ -56,7 +56,7 @@
                                     @endforeach
                                 @else
                                     <tr class="text-center">
-                                        <td colspan="3">{{ __('Không có dữ liệu phù hợp') }}</td>
+                                        <td colspan="4">{{ __('Không có dữ liệu phù hợp') }}</td>
                                     </tr>
                                 @endif
                             </tbody>

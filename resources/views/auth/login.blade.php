@@ -31,13 +31,19 @@
                   <div class="form-group row">
                     <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail</label>
                     <div class="col-md-6">
-                      <input type="text" id="email" class="form-control" name="email" required autofocus>
+                      <input type="text" id="email" class="form-control" name="email" >
+                       @error('email')
+                      <small class="form-text text-muted">{{ $message }}</small>
+                  @enderror
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="password" class="col-md-4 col-form-label text-md-right">Mật khẩu</label>
                     <div class="col-md-6">
-                      <input type="password" id="password" class="form-control" name="password" required>
+                      <input type="password" id="password" class="form-control" name="password" >
+                       @error('password')
+                      <small class="form-text text-muted">{{ $message }}</small>
+                  @enderror
                     </div>
                   </div>
                   <div class="col-md-6 offset-md-4">

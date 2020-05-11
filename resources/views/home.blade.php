@@ -3,10 +3,16 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    Mã sinh viên: {{ $student->code }}
+                    @if($user->role == ADMIN)
+
+                    @elseif($user->role == TEACHER)
+                        Mã giao viên: {{ $user->code }}
+                    @else
+                        Mã sinh viên: {{ $user->code }}
+                    @endif
                 </div>
 
                 <div class="card-body">
@@ -49,7 +55,7 @@
                                             <td class="text-center">{{ $subject->code }}</td>
                                             <td class="text-center">
                                                 <a class="btn btn-sm btn-success"
-                                                   href="{{ route('home.show', $subject->id) }}">{{ __('Chi tiết lớp học') }}</a>
+                                                   href="{{ route('subject.show', $subject->id) }}">{{ __('Chi tiết lớp học') }}</a>
                                             </td>
                                         </tr>
                                         @php($index++)

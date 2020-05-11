@@ -37421,8 +37421,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/hieu/FaceRecognitionWeb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/hieu/FaceRecognitionWeb/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/hungdt/FaceRecognitionWeb/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/hungdt/FaceRecognitionWeb/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

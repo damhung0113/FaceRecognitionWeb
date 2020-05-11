@@ -26,12 +26,11 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $student = $user->findStudent();
-        if ($request) {
+        if ($request == false) {
             $subjects = Subject::findByCondition($request)->get();
         } else {
-            $subjects = $student->subjects()->get();
+            $subjects = $user->subjects()->get();
         }
-        return view('home', compact('student', 'subjects'));
+        return view('home', compact('user', 'subjects'));
     }
 }

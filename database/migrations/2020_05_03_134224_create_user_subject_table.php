@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableRgcognitions extends Migration
+class CreateUserSubjectTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateTableRgcognitions extends Migration
      */
     public function up()
     {
-        Schema::create('rgcognitions', function (Blueprint $table) {
+        Schema::create('user_subject', function (Blueprint $table) {
             $table->id();
-            $table->integer('student_id');
+            $table->integer('user_id');
             $table->integer('subject_id');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateTableRgcognitions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rgcognitions');
+        Schema::dropIfExists('user_subject');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Subject;
 
 class SubjectController extends Controller
 {
@@ -43,9 +44,17 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $subject = Subject::findOrFail($id);
+        $teachers = $subject->teachers();
+        $name_teachers = $subject->teachers()->pluck('name')->implode(', ');
+        $students = $subject->students()->get()->sortBy('name');
+        $student_dateAbsence = Array();
+        foreach ($students as $student) {
+            $student_dateAbsence[$student->code] = $student->dateAbsence($id);
+        }
+        return view('subject.show', compact('subject', 'student_dateAbsence', 'name_teachers'));
     }
 
     /**

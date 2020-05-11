@@ -29,4 +29,12 @@ class Subject extends Model
         return $query->findByName($request->get('name'))
                     ->findByCode($request->get('code'));
     }
+
+    public function teachers() {
+        return $this->belongsToMany('App\User', 'user_subject')->where('role', TEACHER);
+    }
+
+    public function students() {
+        return $this->belongsToMany('App\User', 'user_subject')->where('role', STUDENT);
+    }
 }

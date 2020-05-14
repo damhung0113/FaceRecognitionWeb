@@ -12,3 +12,4 @@ Auth::routes([
 
 Route::resource('/home', 'HomeController')->middleware(['auth']);
 Route::resource('/subject', 'SubjectController')->middleware(['auth']);
+Route::resource('/user', 'UserController')->middleware(['auth']);

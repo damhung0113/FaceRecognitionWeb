@@ -46,10 +46,13 @@ class SubjectController extends Controller
      */
     public function show(Request $request, $id)
     {
+        $code = $request->code;
+        $name = $request->name;
         $subject = Subject::findOrFail($id);
         $teachers = $subject->teachers();
         $name_teachers = $subject->teachers()->pluck('name')->implode(', ');
-        $students = $subject->students()->get()->sortBy('name');
+        $students = $subject->students()->where('code', 'like', '%' . $code . '%')->
+            where('name', 'like', '%' . $name . '%')->get()->sortBy('name');
         $student_dateAbsence = Array();
         foreach ($students as $student) {
             $student_dateAbsence[$student->code] = $student->dateAbsence($id);

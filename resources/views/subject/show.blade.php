@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@if (\Session::has('success'))
+    <div class="alert alert-success">
+        <ul>
+            <li>{!! \Session::get('success') !!}</li>
+        </ul>
+    </div>
+@endif
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -67,8 +75,11 @@
                             <tbody>
                                 @if(!empty($student_dateAbsence))
                                     @php($index = 1)
+                                    @php($current_user = \App\User::find(Auth::user()->id))
                                     @foreach($student_dateAbsence as $code => $dateAbsence)
                                         @php($student = \App\User::where('code', $code)->first())
+                                        @php($id = $student->id)
+                                        @php($subject_id = $subject->id) 
                                         @php($check = in_array(Carbon\Carbon::now()->format('d-m-yy'), $dateAbsence))
                                         <tr>
                                             <td class="text-center">{{ $index }}</td>
@@ -82,13 +93,17 @@
                                             </td>
                                             @php($text = empty($dateAbsence) ? "" : implode('a',$dateAbsence))
                                             @if(count($dateAbsence) > 0)
-                                                <td title="{{ $text }}" class="text-center" data-toggle="modal" data-target="#myModal<?php echo $text;?>">
-                                                    {{ count($dateAbsence) }}
-                                                </td>
+                                                @if($student->id == auth()->user()->id || $current_user->getOriginal('role') != STUDENT)
+                                                    <td title="{{ $text }}" class="text-center" data-toggle="modal" data-target="#myModal<?php echo $text;?>a<?php echo $id;?>a<?php echo $subject_id;?>">
+                                                        {{ count($dateAbsence) }}
+                                                    </td>
+                                                @else
+                                                    <td class="text-center">{{ count($dateAbsence) }}</td>
+                                                @endif
                                             @else
                                                 <td class="text-center">0</td>
                                             @endif
-                                            <div class="modal fade" id="myModal<?php echo $text;?>">
+                                            <div class="modal fade" id="myModal<?php echo $text;?>a<?php echo $id;?>a<?php echo $subject_id;?>">
                                                 <div class="modal-dialog modal-lg">
                                                   <div class="modal-content">
                                                     <div class="modal-header">
@@ -99,10 +114,18 @@
                                                         @php($ar = explode('a', $text))
                                                         @foreach($ar as $date)
                                                             <div class="d-flex justify-content-around pt-1 pb-1">
-                                                                <div class="">{{ $date }}</div>
-                                                                <div class="">
-                                                                    <button class="btn btn-danger btn-sm">Xác nhận đi học</button>
-                                                                </div>
+                                                                {!! Form::open(array('route' => array('recognition.store'), 'method' => 'POST')) !!}
+                                                                {{csrf_field()}}
+                                                                    <div class="date">{{ $date }}</div>
+                                                                    <input type="text" name="date" class="hidden" value="{{$date}}">
+                                                                    <input type="text" name="user_id" class="hidden" value="{{$id}}">
+                                                                    <input type="text" name="subject_id" class="hidden" value="{{$subject_id}}">
+                                                                    <div class="">
+                                                                        @if($current_user->getOriginal('role') != STUDENT)
+                                                                            <button class="btn btn-danger btn-sm xndh" id="{{$id}}">Xác nhận đi học</button>
+                                                                        @endif
+                                                                    </div>
+                                                                {{ Form::close() }}
                                                             </div>
                                                         @endforeach
                                                     </div>
@@ -151,16 +174,13 @@
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+.hidden {
+  visibility: hidden;
+}
 </style>
 
 <script type="text/javascript">
-    $(document).on("click", ".open-AddBookDialog", function () {
-     var myBookId = $(this).data('id');
-     $(".modal-body #bookId").val( myBookId );
-     // As pointed out in comments, 
-     // it is unnecessary to have to manually call the modal.
-     // $('#addBookDialog').modal('show');
-});
+    $('.alert').delay(3000).fadeOut();
 </script>
-
 @endsection

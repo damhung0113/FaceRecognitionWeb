@@ -40,8 +40,10 @@
                                 <a class="nav-link" href="{{ route('home.index') }}">{{ __('Quản lý môn học') }}</a>
                             </li>
                             @if(auth()->user()->role == ADMIN)
-                                <li class="nav-item {{ in_array(Route::currentRouteName(), array('subject.show', 'user.index')) ? 'active' : ''}}">
-                                <a class="nav-link" href="{{ route('user.index') }}">{{ __('Quản lý sinh viên') }}</a>
+                                <li class="nav-item {{ in_array(Route::currentRouteName(), array('student.show', 'student.index')) ? 'active' : ''}}">
+                                <a class="nav-link" href="{{ route('student.index') }}">{{ __('Quản lý sinh viên') }}</a>
+                                <li class="nav-item {{ in_array(Route::currentRouteName(), array('teacher.show', 'teacher.index')) ? 'active' : ''}}">
+                                <a class="nav-link" href="{{ route('teacher.index') }}">{{ __('Quản lý giáo viên') }}</a>
                             </li>
                             @endif
                         @endguest

@@ -14,7 +14,6 @@
                         Mã sinh viên: {{ $user->code }}
                     @endif
                 </div>
-
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-sm">
@@ -25,7 +24,11 @@
                                     <th class="text-center input-sort" data-column="id" style="width: 50px;">{{ __('No') }}</th>
                                     <th class="text-center input-sort" data-column="name">{{ __('Tên môn học') }}<small></small></th>
                                     <th class="text-center input-sort" data-column="code">{{ __('Mã môn học') }}<small></small></th>
-                                    <th></th>
+                                    <th class="text-center">
+                                    @if($user->role == ADMIN)
+                                        <a href="{{ route('subject.create') }}" class="btn btn-primary btn-sm">{{ __('Thêm môn học') }}</a>
+                                    @endif
+                                    </th>
                                 </tr>
                                 <tr>
                                     <th></th>
@@ -38,7 +41,7 @@
                                                name="code" value="{{ request('code') }}"/>
                                     </th>
                                     <th class="text-center">
-                                        <button type="submit" id="search" class="btn btn-primary btn-sm">{{ __('Tìm kiếm') }}</button>
+                                        <button type="submit" id="search" class="btn btn-info btn-sm">{{ __('Tìm kiếm') }}</button>
                                         <a href="{{ route('home.index') }}"
                                                class="btn btn-outline-dark btn-sm">{{ __('Làm mới') }}</a>
                                     </th>
@@ -55,7 +58,11 @@
                                             <td class="text-center">{{ $subject->code }}</td>
                                             <td class="text-center">
                                                 <a class="btn btn-sm btn-success"
-                                                   href="{{ route('subject.show', $subject->id) }}">{{ __('Chi tiết lớp học') }}</a>
+                                                   href="{{ route('subject.show', $subject->id) }}">{{ __('Chi tiết') }}</a>
+                                                @if($user->role == ADMIN)
+                                                    <a class="btn btn-sm btn-danger"
+                                                   href="{{ route('subject.show', $subject->id) }}">{{ __('Xóa') }}</a>
+                                                @endif
                                             </td>
                                         </tr>
                                         @php($index++)

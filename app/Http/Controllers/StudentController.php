@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Subject;
+use App\User;
 
-class SubjectController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        $students = User::where('role', STUDENT)->orderBy('name')->get(); 
+        return view('student.index', compact('students'));
     }
 
     /**
@@ -44,20 +45,9 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $code = $request->code;
-        $name = $request->name;
-        $subject = Subject::findOrFail($id);
-        $teachers = $subject->teachers();
-        $name_teachers = $subject->teachers()->pluck('name')->implode(', ');
-        $students = $subject->students()->where('code', 'like', '%' . $code . '%')->
-            where('name', 'like', '%' . $name . '%')->get()->sortBy('name');
-        $student_dateAbsence = Array();
-        foreach ($students as $student) {
-            $student_dateAbsence[$student->code] = $student->dateAbsence($id);
-        }
-        return view('subject.show', compact('subject', 'student_dateAbsence', 'name_teachers'));
+        //
     }
 
     /**

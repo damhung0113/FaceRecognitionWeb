@@ -29,7 +29,11 @@ class HomeController extends Controller
         if ($request == false) {
             $subjects = Subject::findByCondition($request)->get();
         } else {
-            $subjects = $user->subjects()->get();
+            if ($user->role == ADMIN) {
+                $subjects = Subject::orderBy('name')->get();
+            } else {
+                $subjects = $user->subjects()->get();
+            }
         }
         return view('home', compact('user', 'subjects'));
     }

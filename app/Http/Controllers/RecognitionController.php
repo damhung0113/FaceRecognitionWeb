@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Subject;
+use App\Recognition;
+use Carbon\Carbon;
 
-class SubjectController extends Controller
+class RecognitionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +36,12 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $recognition = new Recognition();
+        $recognition->user_id = (int) $request->user_id;
+        $recognition->subject_id = (int) $request->subject_id;
+        $recognition->created_at = Carbon::parse($request->date);
+        $recognition->save();
+        return redirect('subject/' . $request->subject_id)->with('success', 'Cập nhận thành công');  ;
     }
 
     /**
@@ -44,20 +50,9 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $code = $request->code;
-        $name = $request->name;
-        $subject = Subject::findOrFail($id);
-        $teachers = $subject->teachers();
-        $name_teachers = $subject->teachers()->pluck('name')->implode(', ');
-        $students = $subject->students()->where('code', 'like', '%' . $code . '%')->
-            where('name', 'like', '%' . $name . '%')->get()->sortBy('name');
-        $student_dateAbsence = Array();
-        foreach ($students as $student) {
-            $student_dateAbsence[$student->code] = $student->dateAbsence($id);
-        }
-        return view('subject.show', compact('subject', 'student_dateAbsence', 'name_teachers'));
+        //
     }
 
     /**

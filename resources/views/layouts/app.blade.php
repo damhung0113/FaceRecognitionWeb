@@ -34,7 +34,19 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @guest
+                        @else
+                            <li class="nav-item {{ in_array(Route::currentRouteName(), array('subject.show', 'home.index')) ? 'active' : ''}}">
+                                <a class="nav-link" href="{{ route('home.index') }}">{{ __('Quản lý môn học') }}</a>
+                            </li>
+                            @if(auth()->user()->role == ADMIN)
+                                <li class="nav-item {{ in_array(Route::currentRouteName(), array('student.show', 'student.index')) ? 'active' : ''}}">
+                                <a class="nav-link" href="{{ route('student.index') }}">{{ __('Quản lý sinh viên') }}</a>
+                                <li class="nav-item {{ in_array(Route::currentRouteName(), array('teacher.show', 'teacher.index')) ? 'active' : ''}}">
+                                <a class="nav-link" href="{{ route('teacher.index') }}">{{ __('Quản lý giáo viên') }}</a>
+                            </li>
+                            @endif
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -50,23 +62,25 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Đăng Xuất') }}
+
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Đăng Xuất') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
                         @endguest
                     </ul>
                 </div>

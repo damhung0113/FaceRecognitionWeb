@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Student;
 use App\Recognition;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -20,7 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'role', 'code'
     ];
-    
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -51,9 +52,9 @@ class User extends Authenticatable
 
     public function dateAbsence($subject_id) {
         $dateAbsence = Array();
-        $user_id = Array();
         $recognitions_group = $this->groupByDate($subject_id);
         foreach ($recognitions_group as $date => $recognitions) {
+            $user_id = Array();
             foreach ($recognitions as $index => $recognition) {
                 $user_id[$recognition->user_id] = $recognition->user_id;
             }

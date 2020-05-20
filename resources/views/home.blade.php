@@ -26,7 +26,7 @@
                                     <th class="text-center input-sort" data-column="code">{{ __('Mã môn học') }}<small></small></th>
                                     <th class="text-center">
                                     @if($user->role == ADMIN)
-                                        <a href="{{ route('subject.create') }}" class="btn btn-primary btn-sm">{{ __('Thêm môn học') }}</a>
+                                        <a href="{{ route('home.create') }}" class="btn btn-primary btn-sm">{{ __('Thêm môn học') }}</a>
                                     @endif
                                     </th>
                                 </tr>

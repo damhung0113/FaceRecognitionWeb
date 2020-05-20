@@ -14,7 +14,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = User::where('role', STUDENT)->orderBy('name')->get(); 
+        $students = User::where('role', STUDENT)->orderBy('name')->get();
         return view('student.index', compact('students'));
     }
 
@@ -81,6 +81,11 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = User::findOrFail($id);
+
+        if ($student->delete()) {
+            return redirect()->back()->with('success', __('Xoa thanh cong !'));
+        };
+        return redirect()->back()->with("error", __("Co loi xay ra"));
     }
 }

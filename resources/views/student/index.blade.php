@@ -55,8 +55,8 @@
                                         <td class="text-center">{{ $student->email }}</td>
                                         <td class="text-center">
                                              <button type="submit" id="search" class="btn btn-primary btn-sm">{{ __('Sửa') }}</button>
-                                            <a href="{{ route('student.index') }}"
-                                                   class="btn btn-danger btn-sm">{{ __('Xóa') }}</a>
+                                            <a href="{{ route('student.destroy', [$student->id]) }}"
+                                                   class="btn btn-danger btn-sm" data-method="DELETE">{{ __('Xóa') }}</a>
                                         </td>
                                     </tr>
                                     @php($index++)

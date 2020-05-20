@@ -37,4 +37,9 @@ class HomeController extends Controller
         }
         return view('home', compact('user', 'subjects'));
     }
+
+    public function create(Request $request)
+    {
+        return view('subject.detail');
+    }
 }

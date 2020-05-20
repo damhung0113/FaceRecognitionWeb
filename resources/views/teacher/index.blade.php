@@ -15,12 +15,12 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center input-sort" data-column="id" style="width: 50px;">{{ __('No') }}</th>
-                                        <th class="text-center input-sort" data-column="name">{{ __('Tên sinh viên') }}<small></small></th>
-                                        <th class="text-center input-sort" data-column="code">{{ __('Mã sinh viên') }}<small></small></th>
+                                        <th class="text-center input-sort" data-column="name">{{ __('Tên giáo viên') }}<small></small></th>
+                                        <th class="text-center input-sort" data-column="code">{{ __('Mã giáo viên') }}<small></small></th>
                                         <th class="text-center input-sort" data-column="code">{{ __('Email') }}<small></small></th>
                                         <th class="text-center input-sort" data-column="code">
                                             <a href=""
-                                               class="btn btn-success btn-sm">{{ __('Thêm sinh viên') }}</a>
+                                               class="btn btn-success btn-sm">{{ __('Thêm giáo viên') }}</a>
                                         <small></small></th>
                                     </tr>
                                     <tr>

@@ -176,7 +176,7 @@
                                                 @endif
                                             </td>
                                             @if(App\Recognition::where(['user_id' => auth()->user()->id, 'subject_id' => $subject->id, 'created_at' => $date ])->first() == null && $date < Carbon\Carbon::now())
-                                                <td class="text-center" style="width: 200px;"><button type="button" class="btn btn-danger btn-sm" id="gyc">Gửi yêu cầu xác nhận đi học</button></td>
+                                                <td class="text-center" style="width: 200px;"><button type="button" class="btn btn-danger btn-sm gyc" id="">Gửi yêu cầu xác nhận đi học</button></td>
                                             @else
                                                 <td></td>
                                             @endif
@@ -225,7 +225,7 @@
 
 <script type="text/javascript">
     $('.alert').delay(3000).fadeOut();
-    $( "#gyc" ).click(function() {
+    $( ".gyc" ).click(function() {
         alert( "Chức năng sắp ra mắt, vui lòng sử dụng trao đổi với giáo viên qua email cá nhân" );
     });
 </script>
